@@ -112,18 +112,18 @@ def delete_student(student_account: int):
     return {"message": "Student deleted successfully"}
 
 #获取学生的获奖信息
-@app.get("/students/awards/", response_model=List[AwardsInfo])
+@app.get("/awardsinfo/", response_model=List[AwardsInfo])
 def read_student_awards():
     conn = get_db_connection()
     cursor = conn.cursor(pymysql.cursors.DictCursor)
-    cursor.execute("SELECT * FROM awards")
+    cursor.execute("SELECT * FROM awardsinfo")
     awards = cursor.fetchall()
     cursor.close()
     conn.close()
     return awards
 
 #添加获奖信息及经历
-@app.post("/students/awards/")
+@app.post("/awardsinfo/")
 def create_awards(Students_awards: AwardsInfo):
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -134,7 +134,7 @@ def create_awards(Students_awards: AwardsInfo):
     return {"message": "Student's awards added successfully"}
 
 #更新获奖信息
-@app.put("/students/awards/{student_id}")
+@app.put("/awardsinfo/{AwardsInfo_id}")
 def update_awards(student_id: int, Students_awards: AwardsInfo):
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -148,7 +148,7 @@ def update_awards(student_id: int, Students_awards: AwardsInfo):
     return {"message": "Student's awards updated successfully"}
 
 #删除获奖经历
-@app.delete("/students/awards/{student_id}")
+@app.delete("/awardsinfo/{AwardsInfo_id}")
 def delete_awards(student_id: int):
     conn = get_db_connection()
     cursor = conn.cursor()
